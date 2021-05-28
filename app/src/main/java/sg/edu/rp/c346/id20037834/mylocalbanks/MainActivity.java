@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -18,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnOCBC;
     Button btnUOB;
     String btnSelected;
-    String dbsNumber = "18001111111";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.add(0, 0, 0, "Website");
         menu.add(0, 1, 1, "Contact the bank");
+        menu.add(0,2,2,"Favourite");
+        menu.add(0,3,3,"Unfavourite");
 
         if (v == btnDBS) {
             btnSelected = "DBS";
@@ -60,6 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentHotlineDBS = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + 18001111111L));
                 startActivity(intentHotlineDBS);
             }
+            else if(item.getItemId() == 2){
+                btnDBS.setTextColor(Color.RED);
+            }
+            else if(item.getItemId() == 3){
+                btnDBS.setTextColor(Color.BLACK);
+            }
         } else if (btnSelected.equalsIgnoreCase("OCBC")) {
             if (item.getItemId() == 0) {
                 Intent intentOCBC = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ocbc.com"));
@@ -68,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intentHotlineOCBC = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + 18003633333L));
                 startActivity(intentHotlineOCBC);
             }
+            else if(item.getItemId() == 2){
+                btnOCBC.setTextColor(Color.RED);
+            }
+            else if(item.getItemId() == 3){
+                btnOCBC.setTextColor(Color.BLACK);
+            }
         } else if (btnSelected.equalsIgnoreCase("UOB")) {
             if (item.getItemId() == 0) {
                 Intent intentUOB = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.uob.com.sg"));
@@ -75,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             } else if (item.getItemId() == 1) {
                 Intent intentHotlineUOB = new Intent(Intent.ACTION_DIAL, Uri.parse("tel: " + 18002222121L));
                 startActivity(intentHotlineUOB);
+            }
+            else if(item.getItemId() == 2){
+                btnUOB.setTextColor(Color.RED);
+            }
+            else if(item.getItemId() == 3){
+                btnUOB.setTextColor(Color.BLACK);
             }
         }
         return super.onContextItemSelected(item);
@@ -90,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.EnglishSelection){
-            btnDBS.setText("DBS");
-            btnOCBC.setText("OCBC");
-            btnUOB.setText("UOB");
+            btnDBS.setText(R.string.btnDBS);
+            btnOCBC.setText(R.string.btnOCBC);
+            btnUOB.setText(R.string.btnUOB);
         }
         else if(id == R.id.ChineseSelection){
-            btnDBS.setText("星展银行");
-            btnOCBC.setText("华侨银行");
-            btnUOB.setText("大华银行");
+            btnDBS.setText(R.string.chineseDBS);
+            btnOCBC.setText(R.string.chineseOCBC);
+            btnUOB.setText(R.string.chineseUOB);
         }
         return super.onOptionsItemSelected(item);
     }
